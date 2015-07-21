@@ -1,0 +1,34 @@
+requiredWinstVersion >= "4.11.4.3"
+
+DefVar $UninstallProgram$
+DefVar $InstallProgram$
+DefVar $LogDir$
+DefVar $ProductId$
+DefVar $ProductName$
+DefVar $MinimumSpace$
+DefVar $InstallDir$
+DefVar $PathToExe$
+DefVar $ExitCode$
+DefVar $RegPath$
+DefVar $RegId$
+DefVar $MSVersion$
+DefVar $INST_SystemType$
+DefVar $CustomPostInstall$
+DefVar $CustomPostDeinstall$
+DefVar $StartMenuEntry$
+DefVar $DesktopIcon$
+
+Set $INST_SystemType$ = GetSystemType
+Set $MSVersion$	 = GetMsVersionInfo
+Set $LogDir$ = "%opsiLogDir%"
+
+; ----------------------------------------------------------------
+Set $ProductId$ = "dfn_audacity"
+Set $ProductName$ = "Audacity"
+Set $MinimumSpace$ = "140 MB"
+Set $RegPath$ = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
+Set $RegId$ = "Audacity_is1"
+Set $InstallProgram$ = "audacity-win-2.1.0.exe"
+; ----------------------------------------------------------------
+
+include_append "section_sub_check_exitcode.opsiinc"

@@ -1,0 +1,38 @@
+; Copyright (c) uib gmbh (www.uib.de)
+; This sourcecode is owned by uib gmbh
+; and published under the Terms of the General Public License.
+; credits: http://www.opsi.org/credits/
+
+Message "Uninstalling " + $ProductName$ + " ..."
+
+if not (GetRegistryStringValue32("[" + $RegPath$ + "\" + $RegId$ + "] UninstallString") = "")
+	Set $UninstallProgram$ = GetRegistryStringValue32("[" + $RegPath$ + "\" + $RegId$ + "] UninstallString")
+endif
+
+if not ($UninstallProgram$ = "")
+	comment "Found installed Program, starting uninstall"
+	Winbatch_uninstall
+	sub_check_exitcode
+
+	set $DesktopIcon$ = getProductProperty("desktopicon","no")
+	if $DesktopIcon$ = "yes"
+		comment "Delete common desktop icon"
+		Linkfolder_uninstall_desktopicon	
+	endif
+	
+	comment "include custom post deinstall file"
+	set $CustomPostDeinstall$ = getProductProperty("custom-post-deinstall","none")
+	if not ($CustomPostDeinstall$ = "none")
+		if FileExists("%ScriptPath%\custom\" + $CustomPostDeinstall$)
+			include_insert "%ScriptPath%\custom\" + $CustomPostDeinstall$
+		endif
+	endif
+endif
+
+[Winbatch_uninstall]
+$UninstallProgram$ /verysilent /norestart /SUPPRESSMSGBOXES /nocancel
+
+[Linkfolder_uninstall_desktopicon]
+set_basefolder common_desktopdirectory
+set_subfolder ""
+delete_element $ProductName$

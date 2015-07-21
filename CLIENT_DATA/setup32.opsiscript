@@ -1,0 +1,69 @@
+; Copyright (c) uib gmbh (www.uib.de)
+; This sourcecode is owned by uib
+; and published under the Terms of the General Public License.
+; credits: http://www.opsi.org/credits/
+
+[Actions]
+; common Values for (un)installation
+include_insert "common.opsiinc"
+
+if not(HasMinimumSpace ("%SystemDrive%", $MinimumSpace$))
+	LogError "Not enough space on %SystemDrive%, " + $MinimumSpace$ + " on drive %SystemDrive% needed for " + $ProductId$
+	isFatalError
+	; Stop process and set installation status to failed
+else
+	if FileExists("%ScriptPath%\delsub32.opsiscript")
+		comment "Start uninstall sub section"
+		Sub "%ScriptPath%\delsub32.opsiscript"
+	endif
+
+	Message "Installing " + $ProductName$ + " ..."
+	
+	if not ($MSVersion$ = "6.1")
+		Logwarning "Only tested with windows 7! Please report to the maintainer successful installation on other windows versions."		
+	endif
+	if not ($INST_SystemType$ = "64 Bit System")
+		Logwarning "Only tested with 64 bit version! Please report to the maintainer successful installation on other windows versions."
+	endif
+
+	comment "Start setup program"
+	Winbatch_install
+	Sub_check_exitcode
+
+	if (GetRegistryStringValue32("[" + $RegPath$ + "\" + $RegId$ + "] DisplayIcon") = "")
+		logError "Fatal: After Installation " + $RegPath$ + "\" + $RegId$ + "] not found"
+		isFatalError
+	else
+		comment "Successful Installation"
+
+
+		comment "Get 'DisplayIcon' from registry for path to exe"
+		Set $PathToExe$ = GetRegistryStringValue32("[" + $RegPath$ + "\" + $RegId$ + "] DisplayIcon")
+		
+		set $DesktopIcon$ = getProductProperty("desktopicon","no")
+		if $DesktopIcon$ = "yes"
+			comment "Create common desktop icon"
+			Linkfolder_install_desktopicon	
+		endif
+
+		comment "include custom post install file"
+		set $CustomPostInstall$ = getProductProperty("custom-post-install","none")
+		if not ($CustomPostInstall$ = "none")
+			if FileExists("%ScriptPath%\custom\" + $CustomPostInstall$)
+				include_insert "%ScriptPath%\custom\" + $CustomPostInstall$
+			endif
+		endif
+	endif
+endif
+
+[Winbatch_install]
+"%ScriptPath%\$InstallProgram$" /sp- /verysilent /norestart /LOADINF="%SCRIPTPATH%\audacity.ini" /nocancel /SUPPRESSMSGBOXES
+
+[Linkfolder_install_desktopicon]
+set_basefolder common_desktopdirectory
+set_link
+ 	name: $ProductName$
+ 	target: $PathToExe$
+end_link
+
+
