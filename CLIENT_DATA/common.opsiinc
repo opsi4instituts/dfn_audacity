@@ -9,26 +9,35 @@ DefVar $MinimumSpace$
 DefVar $InstallDir$
 DefVar $PathToExe$
 DefVar $ExitCode$
-DefVar $RegPath$
+DefVar $RegPathUninstall$
 DefVar $RegId$
 DefVar $MSVersion$
 DefVar $INST_SystemType$
 DefVar $CustomPostInstall$
 DefVar $CustomPostDeinstall$
-DefVar $StartMenuEntry$
 DefVar $DesktopIcon$
+DefVar $SearchPattern$
+DefStringList $ResultList$
 
 Set $INST_SystemType$ = GetSystemType
 Set $MSVersion$	 = GetMsVersionInfo
 Set $LogDir$ = "%opsiLogDir%"
 
 ; ----------------------------------------------------------------
-Set $ProductId$ = "dfn_audacity"
+Set $ProductId$ = "audacity"
 Set $ProductName$ = "Audacity"
 Set $MinimumSpace$ = "140 MB"
-Set $RegPath$ = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
-Set $RegId$ = "Audacity_is1"
-Set $InstallProgram$ = "audacity-win-2.1.0.exe"
+Set $RegPathUninstall$ = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
+Set $InstallProgram$ = "audacity-win-2.1.1.exe"
 ; ----------------------------------------------------------------
 
 include_append "section_sub_check_exitcode.opsiinc"
+include_append "section_sub_search_registry32_uninstall_keys.opsiinc"
+
+if not ($MSVersion$ = "6.1")
+	Logwarning "Only tested with windows 7! Please report to the maintainer successful installation on other windows versions."		
+endif
+if not ($INST_SystemType$ = "64 Bit System")
+	Logwarning "Only tested with 64 bit version! Please report to the maintainer successful installation on other windows versions."
+endif
+

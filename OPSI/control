@@ -1,5 +1,5 @@
 [Package]
-version: 1
+version: 2
 depends: 
 incremental: False
 
@@ -9,7 +9,7 @@ id: dfn_audacity
 name: Audacity
 description: Editor und Rekorder für Audiodateien; vielfältige Bearbeitungsfunktionen (Mischen, Schneiden, ...) von beliebig vielen Audiospuren
 advice: 
-version: 2.1.0
+version: 2.1.1
 priority: 0
 licenseRequired: False
 productClasses: 
@@ -49,9 +49,24 @@ values: ["none", "post-deinstall.opsiinc"]
 default: ["none"]
 
 [Changelog]
+dfn_audacity (2.1.1-2)
+	* neue Upstreamversion
+	* $ProductId$ wieder ohne 'dfn_'
+	* Logo/Bitmap-Anzeige hinzugefügt
+	* Suche nach Installationen hinzugefügt (https://opsi.wzb.eu/wiki/index.php/Uninstall-Registry_durchsuchen_und_Schl%C3%BCssel_ermitteln)
+ -- Thomas Besser (archIT/KIT) <thomas.besser@kit.edu>, 03.11.2015
+
 audacity (2.1.0-1)
 	* initiales dfn_audacity Paket
  -- Thomas Besser (archIT/KIT) <thomas.besser@kit.edu>, 30.06.2015
+
+
+
+
+
+
+
+
 
 
 
