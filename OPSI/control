@@ -1,5 +1,5 @@
 [Package]
-version: 2
+version: 1
 depends: 
 incremental: False
 
@@ -9,7 +9,7 @@ id: dfn_audacity
 name: Audacity
 description: Editor und Rekorder für Audiodateien; vielfältige Bearbeitungsfunktionen (Mischen, Schneiden, ...) von beliebig vielen Audiospuren
 advice: 
-version: 2.1.1
+version: 2.1.2
 priority: 0
 licenseRequired: False
 productClasses: 
@@ -49,6 +49,11 @@ values: ["none", "post-deinstall.opsiinc"]
 default: ["none"]
 
 [Changelog]
+dfn_audacity (2.1.2-1)
+	* neue Upstreamversion
+	* Test unter win10-x64
+ -- Thomas Besser (archIT/KIT) <thomas.besser@kit.edu>, 25.01.2016
+
 dfn_audacity (2.1.1-2)
 	* neue Upstreamversion
 	* $ProductId$ wieder ohne 'dfn_'
@@ -59,6 +64,9 @@ dfn_audacity (2.1.1-2)
 audacity (2.1.0-1)
 	* initiales dfn_audacity Paket
  -- Thomas Besser (archIT/KIT) <thomas.besser@kit.edu>, 30.06.2015
+
+
+
 
 
 
