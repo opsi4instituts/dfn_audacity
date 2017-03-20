@@ -18,17 +18,20 @@ DefVar $CustomPostDeinstall$
 DefVar $DesktopIcon$
 DefVar $SearchPattern$
 DefStringList $ResultList$
+DefVar $ProductVersion$
 
 Set $INST_SystemType$ = GetSystemType
 Set $MSVersion$	 = GetMsVersionInfo
 Set $LogDir$ = "%opsiLogDir%"
+
+Set $ProductVersion$ = takestring (0, splitString("%installingProdVersion%", "-"))
 
 ; ----------------------------------------------------------------
 Set $ProductId$ = "audacity"
 Set $ProductName$ = "Audacity"
 Set $MinimumSpace$ = "140 MB"
 Set $RegPathUninstall$ = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
-Set $InstallProgram$ = "audacity-win-2.1.2.exe"
+Set $InstallProgram$ = "audacity-win-" + $ProductVersion$ + ".exe"
 ; ----------------------------------------------------------------
 
 include_append "section_sub_check_exitcode.opsiinc"
