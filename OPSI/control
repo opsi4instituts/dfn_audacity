@@ -9,7 +9,7 @@ id: dfn_audacity
 name: Audacity
 description: Editor und Rekorder für Audiodateien; vielfältige Bearbeitungsfunktionen (Mischen, Schneiden, ...) von beliebig vielen Audiospuren
 advice: 
-version: 2.1.3
+version: 2.2.0
 priority: 0
 licenseRequired: False
 productClasses: 
@@ -22,13 +22,10 @@ customScript:
 userLoginScript: 
 
 [ProductProperty]
-type: unicode
-name: desktopicon
-multivalue: False
-editable: False
-description: Icon on Desktop
-values: ["no", "yes"]
-default: ["no"]
+type: bool
+name: desktop-link
+description: Link on Desktop?
+default: False
 
 [ProductProperty]
 type: unicode
@@ -48,7 +45,22 @@ description: Define filename for include script in custom directory after deinst
 values: ["none", "post-deinstall.opsiinc"]
 default: ["none"]
 
+[ProductProperty]
+type: unicode
+name: silent-option
+multivalue: False
+editable: False
+description: Un/Install silent or very silent; Show progressbar of installer or not
+values: ["/silent", "/verysilent"]
+default: ["/silent"]
+
 [Changelog]
+dfn_audacity (2.2.0-1)
+        * neue Upstreamversion
+        * Anpassungen gem. o4i-Richtlinie (Desktop-Link, Logo, Silent-Option)
+        * alte uib Copyrights (Überbleibsel von opsi-template) entfernt
+ -- Thomas Besser (archIT/KIT) <thomas.besser@kit.edu>, 03.11.2017
+
 dfn_audacity (2.1.3-1)
 	* neue Upstreamversion
 	* o4i-Logo
