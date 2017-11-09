@@ -22,6 +22,7 @@ else
 	; Parameter: $SearchPattern$ Suchbegriff in Registry
 	Sub_search_registry32_uninstall_keys
 	; Rückgabewert: $ResultList$ gefundene Einträge
+	set $ResultList$ = removeFromListByContaining("LAME", $ResultList$)
 
 	Switch count ($ResultList$)
 		Case "0"
