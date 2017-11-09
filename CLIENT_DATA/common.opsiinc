@@ -1,4 +1,4 @@
-requiredWinstVersion >= "4.11.4.3"
+requiredWinstVersion >= "4.11.5.1"
 
 DefVar $UninstallProgram$
 DefVar $InstallProgram$

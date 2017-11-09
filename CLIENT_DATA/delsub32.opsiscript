@@ -5,6 +5,7 @@ Set $SearchPattern$ = $ProductName$
 Sub_search_registry32_uninstall_keys
 ; Rückgabewert: $ResultList$ gefundene Einträge
 
+set $ResultList$ = removeFromListByContaining("LAME", $ResultList$)
 Switch count ($ResultList$)
 	Case "0"
 		comment "No installations of " + $SearchPattern$ + " found in $RegPathUninstall$. Nothing to do ;-)"
