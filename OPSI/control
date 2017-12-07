@@ -1,5 +1,5 @@
 [Package]
-version: 2
+version: 1
 depends: 
 incremental: False
 
@@ -9,7 +9,7 @@ id: dfn_audacity
 name: Audacity
 description: Editor und Rekorder für Audiodateien; vielfältige Bearbeitungsfunktionen (Mischen, Schneiden, ...) von beliebig vielen Audiospuren
 advice: 
-version: 2.2.0
+version: 2.2.1
 priority: 0
 licenseRequired: False
 productClasses: 
@@ -55,14 +55,18 @@ values: ["/silent", "/verysilent"]
 default: ["/silent"]
 
 [Changelog]
+dfn_audacity (2.2.1-1)
+	* neue Upstreamversion
+ -- Thomas Besser (archIT/KIT) <thomas.besser@kit.edu>, 07.12.2017
+
 dfn_audacity (2.2.0-2)
-        * Bugfix Registrysuche (https://github.com/opsi4instituts/dfn_audacity/pull/1)
+	* Bugfix Registrysuche (https://github.com/opsi4instituts/dfn_audacity/pull/1)
  -- Thomas Besser (archIT/KIT) <thomas.besser@kit.edu>, 09.11.2017
 
 dfn_audacity (2.2.0-1)
-        * neue Upstreamversion
-        * Anpassungen gem. o4i-Richtlinie (Desktop-Link, Logo, Silent-Option)
-        * alte uib Copyrights (Überbleibsel von opsi-template) entfernt
+	* neue Upstreamversion
+	* Anpassungen gem. o4i-Richtlinie (Desktop-Link, Logo, Silent-Option)
+	* alte uib Copyrights (Überbleibsel von opsi-template) entfernt
  -- Thomas Besser (archIT/KIT) <thomas.besser@kit.edu>, 03.11.2017
 
 dfn_audacity (2.1.3-1)
