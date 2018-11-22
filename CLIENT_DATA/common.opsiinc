@@ -1,4 +1,4 @@
-requiredWinstVersion >= "4.11.5.1"
+requiredWinstVersion >= "4.12.0.16"
 
 DefVar $UninstallProgram$
 DefVar $InstallProgram$
@@ -9,17 +9,18 @@ DefVar $MinimumSpace$
 DefVar $InstallDir$
 DefVar $PathToExe$
 DefVar $ExitCode$
-DefVar $RegPathUninstall$
+DefVar $ErrorString$
 DefVar $RegId$
+DefVar $RegBitScope$
 DefVar $MSVersion$
 DefVar $INST_SystemType$
 DefVar $CustomPostInstall$
 DefVar $CustomPostDeinstall$
 DefVar $DesktopLink$
 DefVar $SilentOption$
-DefVar $SearchPattern$
 DefStringList $ResultList$
 DefVar $ProductVersion$
+DefVar $InstalledVersion$
 
 Set $INST_SystemType$ = GetSystemType
 Set $MSVersion$	 = GetMsVersionInfo
@@ -33,14 +34,15 @@ Set $SilentOption$ = getProductProperty("silent-option", "/silent")
 Set $ProductId$ = "audacity"
 Set $ProductName$ = "Audacity"
 Set $MinimumSpace$ = "140 MB"
-Set $RegPathUninstall$ = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
 Set $InstallProgram$ = "audacity-win-" + $ProductVersion$ + ".exe"
 ; ----------------------------------------------------------------
 
-include_append "section_sub_check_exitcode.opsiinc"
-include_append "section_sub_search_registry32_uninstall_keys.opsiinc"
+; exitcode library von UIB (siehe C:\program files(x86)\opsi.org\opsi-client-agent\opsi-winst\lib) mit 'local functions'
+importLib "uib_exitcode.opsiscript::isInnoExitcodeFatal"
+; Library registry search uninstall keys (local functions)
+importLib "func_search_registry_uninstall_keys.opsiinc"
 
-if not ($MSVersion$ = "6.1" OR $MSVersion$ = "10.0")
+if not ($MSVersion$ = "10.0")
 	Logwarning "Only tested with windows 7 and 10! Please report to the maintainer successful installation on other windows versions."		
 endif
 if not ($INST_SystemType$ = "64 Bit System")
